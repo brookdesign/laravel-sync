@@ -1,10 +1,10 @@
 {
-    "name": "brook/brook-laravel",
+    "name": "brook/laravel-sync",
     "description": "First test of syncing brook imagery with laravel projects.",
     "authors": [
         {
             "name": "Tim Murphy",
-            "email": "lowertown@mac.com"
+            "email": "tim@brook.io"
         }
     ],
     "minimum-stability": "stable",
