@@ -1,0 +1,24 @@
+{
+    "name": "brook/brook-laravel",
+    "description": "First test of syncing brook imagery with laravel projects.",
+    "authors": [
+        {
+            "name": "Tim Murphy",
+            "email": "lowertown@mac.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Brook\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": ["Brook\\BrookServiceProvider"]
+        }
+    }
+}
