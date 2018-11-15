@@ -26,7 +26,18 @@ class BrookServiceProvider extends ServiceProvider
                     break;
                 }
             }
-            return "<?php echo '<img width=\"50%\" src=\"/brook/$name.jpg\" />' ?>";
+            return "<?php echo '<img width=\"50%\" src=\"/brook/$name.png\" />' ?>";
+        });
+
+        Blade::directive('brookstyle', function ($expression) {
+            $imageArray = json_decode(file_get_contents(base_path().'/brook.json'));
+            foreach ($imageArray as $image) {
+                if ($image->firebase_name === $expression) {
+                    $name = $image->milestoneID;
+                    break;
+                }
+            }
+            return "<?php echo 'style=\"background: url(/brook/$name.png); background-size: cover;\"' ?>";
         });
     }
 
