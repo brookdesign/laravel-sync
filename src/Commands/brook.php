@@ -50,8 +50,8 @@ class brook extends Command
         }
 
         foreach ($imageArray as $image) {
-            $imagefile = file_get_contents($image->milestoneImageURL);
             if (!file_exists(public_path().'/brook/'.$image->milestoneID.'.png')) {
+                $imagefile = file_get_contents($image->milestoneImageURL);
                 file_put_contents(public_path().'/brook/'.$image->milestoneID.'.png', $imagefile);
                 $this->comment($image->firebase_name);
                 $this->comment($image->milestoneImageURL);
