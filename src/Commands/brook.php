@@ -51,9 +51,11 @@ class brook extends Command
 
         foreach ($imageArray as $image) {
             $imagefile = file_get_contents($image->milestoneImageURL);
-            file_put_contents(public_path().'/brook/'.$image->milestoneID.'.png', $imagefile);
-            $this->comment($image->firebase_name);
-            $this->comment($image->milestoneImageURL);
+            if (!file_exists(public_path().'/brook/'.$image->milestoneID.'.png')) {
+                file_put_contents(public_path().'/brook/'.$image->milestoneID.'.png', $imagefile);
+                $this->comment($image->firebase_name);
+                $this->comment($image->milestoneImageURL);
+            }
         }
         Artisan::call('view:clear');
         $this->info('You are now synced with the brook server.');
