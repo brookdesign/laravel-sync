@@ -43,6 +43,7 @@ class brook extends Command
         $client = new Client();
         $res = $client->request('GET', 'https://brook.test/api/images?api_token='.env('BROOK_KEY'), ['verify' => false]);
         $imageArray = json_decode($res->getBody());
+        //dd($imageArray);
         file_put_contents(base_path().'/brook.json', $res->getBody());
 
         if (!file_exists(public_path().'/brook')) {
@@ -50,11 +51,11 @@ class brook extends Command
         }
 
         foreach ($imageArray as $image) {
-            if (!file_exists(public_path().'/brook/'.$image->milestoneID.'.png')) {
-                $imagefile = file_get_contents($image->milestoneImageURL);
-                file_put_contents(public_path().'/brook/'.$image->milestoneID.'.png', $imagefile);
-                $this->comment($image->firebase_name);
-                $this->comment($image->milestoneImageURL);
+            foreach ($image->variants as $variant) {
+                $imagefile = file_get_contents($variant->variantImageURL);
+                file_put_contents(public_path().'/brook/'.$image->id.'-'.$variant->name.'.png', $imagefile);
+                $this->comment($image->id.'-'.$variant->name.'.png');
+                $this->comment($variant->variantImageURL);
             }
         }
         Artisan::call('view:clear');
