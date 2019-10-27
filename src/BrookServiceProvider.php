@@ -19,7 +19,6 @@ class BrookServiceProvider extends ServiceProvider
     public function boot()
     {
         
-
         Blade::directive('brookstyle', function ($expression) {
             $imageArray = json_decode(file_get_contents(base_path().'/brook.json'));
             foreach ($imageArray as $image) {
